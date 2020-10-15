@@ -9,7 +9,7 @@
     "dev": "webpack --mode development",
     "startOLD": "webpack  serve",
     "watch": "webpack --watch",
-    "start": "webpack-dev-server --config webpack.config.js --mode development"
+    "start": "webpack-dev-server --config webpack.config.dev.js --mode development"
   },
   "author": "",
   "license": "ISC",
