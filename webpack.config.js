@@ -1,24 +1,35 @@
+const path = require("path");
 
-const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './src/index.html',
-  filename: 'index.html',
-  inject: 'body'
-})
+module.exports = {
+  mode: "development",
+  entry: { main: ["./src/index.js"] },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[hash].js",
+    publicPath: "/",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "My App",
+      template: "./src/index.html",
+    }),
+  ],
+};
 
-module.exports = { 
-  entry: './src/index.js', 
-  output: { 
-    path: path.resolve('dist'), 
-    filename: 'index_bundle.js'
-  }, 
-  module: { 
-    loaders: [ 
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
-    ]
-  }, 
-  plugins: [HtmlWebpackPluginConfig]
-}
+// loaders: [
+//       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+//       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+//     ]
